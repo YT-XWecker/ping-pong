@@ -47,6 +47,12 @@ raketka2 = Player('raketka.png', 550, 200, 50, 150, 4)
 ball = GameSprite('ball.png', 200, 200, 50, 50, 4)
 
 
+font.init()
+font = font.Font(None, 35)
+lose1 = font.render('fndjfbbsbf', True, (180, 0, 0))
+lose2 = font.render('frgfwrehytegre', True, (180, 0, 0))
+
+
 speed_x = 3
 speed_y = 3
 
@@ -74,6 +80,17 @@ while game:
 
             if ball.rect.y > HEIGHT - 50 or ball.rect.y < 0:
                 speed_y *= -1
+
+
+            if ball.rect.x > WIDTH:
+                finish = True
+                window.blit(lose2, (100, 200))
+
+
+            if ball.rect.x < WIDTH:
+                finish = True
+                window.blit(lose1, (100, 200))
+
 
 
             raketka1.reset()
