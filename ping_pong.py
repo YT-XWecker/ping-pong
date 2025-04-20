@@ -39,11 +39,16 @@ game = True
 finish = False
 
 clock = time.Clock()
-FPS = 9000
+FPS = 120
 
 
 raketka1 = Player('raketka.png', 5, 200, 50, 80, 10)
 raketka2 = Player('raketka.png', 550, 200, 50, 150, 4)
+ball = GameSprite('ball.png', 200, 200, 50, 50, 4)
+
+
+speed_x = 3
+speed_y = 3
 
 
 while game:
@@ -55,12 +60,25 @@ while game:
             window.blit(background, (0,0))
 
 
+            ball.rect.x += speed_x
+            ball.rect.y += speed_y
+
+
             raketka1.update_l()
             raketka2.update_r()
 
 
+            if sprite.collide_rect(raketka1, ball) or sprite.collide_rect(raketka2, ball):
+                speed_x *= -1
+
+
+            if ball.rect.y > HEIGHT - 50 or ball.rect.y < 0:
+                speed_y *= -1
+
+
             raketka1.reset()
             raketka2.reset()
+            ball.reset()
     
     
     
